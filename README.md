@@ -1,2 +1,2 @@
 # pizzeria-backend
-Bootcamp's Java Springboot project
+Springboot project developed in Java for coding bootcamp.
