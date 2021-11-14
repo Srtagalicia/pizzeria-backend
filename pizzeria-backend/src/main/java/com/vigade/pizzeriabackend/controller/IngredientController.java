@@ -24,7 +24,7 @@ public class IngredientController {
     //usar un paquete service
     @Autowired
     private IIngredientRepo repo;
-//retorno de datos, por eso usamos el @getmapping
+    //retorno de datos, por eso usamos el @getmapping
     @GetMapping
     public Flux<Ingredient> list() {
         return repo.list();
