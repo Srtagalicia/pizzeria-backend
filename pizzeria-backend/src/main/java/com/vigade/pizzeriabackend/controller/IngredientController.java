@@ -16,25 +16,31 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-
 @RestController
 @RequestMapping("/ingredients")
 public class IngredientController {
     private static final Logger Log = LoggerFactory.getLogger(IngredientController.class);
 
-    //usar un paquete service
+    // TODO: Use a service package instead of acoplating this
     @Autowired
     private IIngredientRepo repo;
-    //retorno de datos, por eso usamos el @getmapping
+
+    // listt all ingredients
     @GetMapping
     public Flux<Ingredient> list() {
         return repo.list();
     }
     //para registrar ingredientes
+
+    // list one ingredient
+
+    // create an ingredient
     @PostMapping
     public Mono<Ingredient> register(@RequestBody Ingredient ingredient) {
         return repo.register(ingredient);
     }
+
+    // modify an ingredient
     @PutMapping
     public Mono<Ingredient> modify(@RequestBody Ingredient ingredient) {
         return repo.register(ingredient);
