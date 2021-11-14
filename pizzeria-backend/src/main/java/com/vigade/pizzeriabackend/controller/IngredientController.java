@@ -23,7 +23,7 @@ import reactor.core.publisher.Mono;
 public class IngredientController {
     private static final Logger Log = LoggerFactory.getLogger(IngredientController.class);
 
-    // TODO: Use a service package instead of acoplating this
+    // TODO: Use a service package instead of this to keep the SOLID principles sticked to the project
     @Autowired
     private IIngredientRepo repo;
 
