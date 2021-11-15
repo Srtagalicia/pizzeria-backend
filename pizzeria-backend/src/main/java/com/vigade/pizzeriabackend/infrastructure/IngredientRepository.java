@@ -1,0 +1,9 @@
+package com.vigade.pizzeriabackend.infrastructure;
+
+import java.util.UUID;
+import com.vigade.pizzeriabackend.domain.Ingredient;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface IngredientRepository extends JpaRepository<Ingredient, UUID> {
+
+}
