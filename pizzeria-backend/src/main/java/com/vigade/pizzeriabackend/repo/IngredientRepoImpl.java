@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.vigade.pizzeriabackend.controller.IngredientController;
-import com.vigade.pizzeriabackend.model.Ingredient;
+import com.vigade.pizzeriabackend.domain.Ingredient;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
