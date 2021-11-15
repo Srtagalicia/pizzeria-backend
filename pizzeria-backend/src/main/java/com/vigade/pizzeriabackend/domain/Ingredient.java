@@ -1,4 +1,4 @@
-package com.vigade.pizzeriabackend.model;
+package com.vigade.pizzeriabackend.domain;
 
 import lombok.*;
 
