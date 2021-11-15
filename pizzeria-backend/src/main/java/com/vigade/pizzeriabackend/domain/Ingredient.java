@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "Ingredients")
@@ -16,22 +18,10 @@ public class Ingredient {
         nullable=false
     )
     private UUID id = UUID.randomUUID();
+    @Getter
+    @Setter
     private String name;
+    @Getter
+    @Setter
     private float price;
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setPrice(float price) {
-        this.price = price;
-    }
-
-    public float getPrice() {
-        return price;
-    }
 }
