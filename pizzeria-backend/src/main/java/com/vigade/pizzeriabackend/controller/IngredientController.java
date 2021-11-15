@@ -1,6 +1,6 @@
 package com.vigade.pizzeriabackend.controller;
 
-import com.vigade.pizzeriabackend.model.Ingredient;
+import com.vigade.pizzeriabackend.domain.Ingredient;
 import com.vigade.pizzeriabackend.repo.IIngredientRepo;
 
 import org.springframework.beans.factory.annotation.Autowired;
