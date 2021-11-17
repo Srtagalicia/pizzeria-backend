@@ -1,34 +1,25 @@
 package com.vigade.pizzeriabackend.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import java.util.UUID;
-import javax.persistence.Entity;
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.GeneratedValue;
-import org.hibernate.annotations.GenericGenerator;
-import lombok.Getter;
-import lombok.Setter;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
 
-@Entity
-@Table(name = "Ingredients")
-@Getter @Setter
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Table("ingredients")
 public class Ingredient {
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(
-        name = "UUID",
-        strategy = "org.hibernate.id.UUIDGenerator"
-    )
-    @Column(
-        name = "id",
-        updatable = false,
-        nullable = false,
-        columnDefinition = "varbinary(16)"
-    )
-    private UUID id;
-    @Column(nullable = false)
+    @Column("id")
+    private UUID id = UUID.randomUUID();
+    @Column("name")
     private String name;
-    @Column(nullable = false)
+    @Column("price")
     private float price;
 }

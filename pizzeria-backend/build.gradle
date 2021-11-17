@@ -20,7 +20,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
 	compileOnly 'org.projectlombok:lombok'
   	annotationProcessor 'org.projectlombok:lombok'
-	runtimeOnly 'mysql:mysql-connector-java'
+	//runtimeOnly 'mysql:mysql-connector-java'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'io.projectreactor:reactor-test'
 	implementation 'org.modelmapper:modelmapper:2.4.2'
@@ -30,6 +30,8 @@ dependencies {
 	implementation 'org.springframework:spring-jdbc'
 	// Reactive MySQL
 	implementation 'dev.miku:r2dbc-mysql'
+	//LiquiBase
+	implementation 'org.liquibase:liquibase-core'
 }
 
 application {

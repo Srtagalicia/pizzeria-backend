@@ -1,5 +1,6 @@
 package com.vigade.pizzeriabackend.application;
+import reactor.core.publisher.Mono;
 
 public interface Add<I,O> {
-    public O add(I entity);
+    public Mono<O> add(I entity);
 }

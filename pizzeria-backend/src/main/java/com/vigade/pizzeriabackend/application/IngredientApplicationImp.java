@@ -4,6 +4,7 @@ import com.vigade.pizzeriabackend.domain.Ingredient;
 import com.vigade.pizzeriabackend.infrastructure.IngredientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Mono;
 import org.modelmapper.ModelMapper;
 
 @Service
@@ -19,9 +20,9 @@ public class IngredientApplicationImp implements IngredientApplication {
     }
 
     @Override
-    public IngredientDTOOutput add(IngredientDTOInput ingredientDTOInput) {
+    public Mono<IngredientDTOOutput> add(IngredientDTOInput ingredientDTOInput) {
         Ingredient ingredient = modelMapper.map(ingredientDTOInput, Ingredient.class);
         ingredientRepository.save(ingredient);
-        return modelMapper.map(ingredient, IngredientDTOOutput.class);
+        return Mono.just(modelMapper.map(ingredient, IngredientDTOOutput.class));
     }
 }
