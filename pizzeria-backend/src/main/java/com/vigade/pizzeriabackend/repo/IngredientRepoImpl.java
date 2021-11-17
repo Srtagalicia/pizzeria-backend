@@ -2,12 +2,14 @@ package com.vigade.pizzeriabackend.repo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import com.vigade.pizzeriabackend.controller.IngredientController;
 import com.vigade.pizzeriabackend.domain.Ingredient;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.r2dbc.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import reactor.core.publisher.Flux;
@@ -35,21 +37,26 @@ public class IngredientRepoImpl implements IIngredientRepo {
     @Override
     public Flux<Ingredient> list() {
         List<Ingredient> ingredients = new ArrayList<>();
-        ingredients.add(new Ingredient(1, "queso"));
-        ingredients.add(new Ingredient(2, "jamon"));
-        ingredients.add(new Ingredient(3, "tomate"));
+        
         return Flux.fromIterable(ingredients);
     }
 
-    @Override
+   /* @Override
     public Mono<Ingredient> listById(Integer id) {
-        return Mono.just(new Ingredient(5, "oregano"));
+        return Mono.just(new Ingredient(UUID.randomUUID(), "oregano"));
     }
-
+*/
     @Override
     public Mono<Void> delete(Integer id) {
         // TODO Auto-generated method stub
         return Mono.empty();
+    }
+
+    
+    @Override
+    public Mono<Ingredient> listById(Integer id) {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }
