@@ -13,6 +13,7 @@ repositories {
 }
 
 dependencies {
+	implementation 'com.github.jasync-sql:jasync-r2dbc-mysql:2.0.2'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	//reactive webflux
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
@@ -22,7 +23,6 @@ dependencies {
 	//mysql jasync y dev.miku:r2dbc-mysql
 	implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
   	runtimeOnly 'dev.miku:r2dbc-mysql'
-	compileOnly 'com.github.jasync-sql:jasync-mysql:2.0.0'
   	runtimeOnly 'mysql:mysql-connector-java'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'io.projectreactor:reactor-test'
