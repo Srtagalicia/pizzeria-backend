@@ -1,4 +1,4 @@
-package com.vigade.pizzeriabackend.core;
+package com.vigade.pizzeriabackend.core.baseClasses;
 
 import java.util.UUID;
 import org.springframework.data.domain.Persistable;
