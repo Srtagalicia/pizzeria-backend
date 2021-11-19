@@ -1,0 +1,29 @@
+package com.vigade.pizzeriabackend.domain.userDomain;
+
+import com.vigade.pizzeriabackend.core.EntityBase;
+import org.springframework.data.relational.core.mapping.Table;
+import org.springframework.data.relational.core.mapping.Column;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.NoArgsConstructor;
+
+@Table("user")
+public @NoArgsConstructor @Getter @Setter class User extends EntityBase {
+    @Column("name")
+    private String name;
+
+    @Column("surname")
+    private String surname;
+
+    @Column("email")
+    private String email;
+
+    @Column("passw")
+    private String passw;
+
+    @Column("type")
+    private String type;
+	
+    @Column("role")
+    private String role;
+}
