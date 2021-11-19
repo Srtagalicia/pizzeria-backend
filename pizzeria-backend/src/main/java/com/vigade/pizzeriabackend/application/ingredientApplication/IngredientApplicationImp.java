@@ -1,7 +1,8 @@
-package com.vigade.pizzeriabackend.application;
+package com.vigade.pizzeriabackend.application.ingredientApplication;
 
-import com.vigade.pizzeriabackend.domain.Ingredient;
-import com.vigade.pizzeriabackend.infrastructure.IngredientRepository;
+import java.util.UUID;
+import com.vigade.pizzeriabackend.domain.ingredientDomain.Ingredient;
+import com.vigade.pizzeriabackend.domain.ingredientDomain.IngredientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
@@ -21,8 +22,9 @@ public class IngredientApplicationImp implements IngredientApplication {
 
     @Override
     public Mono<IngredientDTOOutput> add(IngredientDTOInput ingredientDTOInput) {
-        Ingredient ingredient = modelMapper.map(ingredientDTOInput, Ingredient.class);
-        ingredientRepository.save(ingredient);
-        return Mono.just(modelMapper.map(ingredient, IngredientDTOOutput.class));
+        Ingredient ingredient = this.modelMapper.map(ingredientDTOInput, Ingredient.class);
+        ingredient.setId(UUID.randomUUID());
+        ingredient.setThisNew(true);
+        return this.ingredientRepository.add(ingredient).flatMap(monoIngredient->Mono.just(this.modelMapper.map(monoIngredient, IngredientDTOOutput.class)));
     }
 }
