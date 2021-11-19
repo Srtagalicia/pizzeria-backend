@@ -1,6 +1,5 @@
 package com.vigade.pizzeriabackend.controller;
 
-import javax.validation.Valid;
 import com.vigade.pizzeriabackend.application.ingredientApplication.IngredientApplication;
 import com.vigade.pizzeriabackend.application.ingredientApplication.IngredientDTOInput;
 import com.vigade.pizzeriabackend.application.ingredientApplication.IngredientDTOOutput;
@@ -26,7 +25,7 @@ public class IngredientController {
 
 	@PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Mono<IngredientDTOOutput> addIngredient(@Valid @RequestBody IngredientDTOInput ingredientDTOInput) {
-        return ingredientApplication.add(ingredientDTOInput);
+    public Mono<IngredientDTOOutput> addIngredient(@RequestBody IngredientDTOInput ingredientDTOInput) {
+        return this.ingredientApplication.add(ingredientDTOInput);
     }
 }
