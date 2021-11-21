@@ -29,6 +29,7 @@ dependencies {
 	//implementation 'org.springframework:spring-jdbc'
 	implementation 'dev.miku:r2dbc-mysql'
 	//implementation 'org.liquibase:liquibase-core'
+	implementation 'org.mindrot:jbcrypt:0.4'
 }
 
 application {
