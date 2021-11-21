@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.NoArgsConstructor;
 
-@Table("user")
+@Table("users")
 public @NoArgsConstructor @Getter @Setter class User extends EntityBase {
     @Column("name")
     private String name;
@@ -25,5 +25,5 @@ public @NoArgsConstructor @Getter @Setter class User extends EntityBase {
     private String type;
 	
     @Column("role")
-    private String role;
+    private Role role;
 }
