@@ -29,5 +29,10 @@ public class IngredientApplicationImp extends ApplicationBase<Ingredient, UUID> 
         ingredient.setThisNew(true);
         return this.ingredientRepository.add(ingredient).flatMap(monoIngredient -> Mono.just(this.modelMapper.map(monoIngredient, IngredientDTOOutput.class)));
     }
+
+    @Override
+    public Mono<IngredientDTOOutput> get(UUID id) {
+        return this.getById(id).flatMap(monoIngredient -> Mono.just(this.modelMapper.map(monoIngredient, IngredientDTOOutput.class)));
+    }
     }
 }
