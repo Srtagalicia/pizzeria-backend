@@ -44,4 +44,10 @@ public class IngredientController {
 	public Mono<IngredientDTOOutput> updateIngredient(@PathVariable UUID id, @RequestBody IngredientDTOInput ingredientDTOInput) {
 		return this.ingredientApplication.update(id, ingredientDTOInput);
 	}
+
+	@DeleteMapping("/{id}")
+	@ResponseStatus(HttpStatus.OK)
+	public Mono<Void> deleteIngredient(@PathVariable UUID id) {
+		return this.ingredientApplication.delete(id);
+	}
 }
