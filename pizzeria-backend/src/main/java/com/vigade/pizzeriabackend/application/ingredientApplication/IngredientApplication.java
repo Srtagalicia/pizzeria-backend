@@ -6,4 +6,5 @@ import reactor.core.publisher.Mono;
 public interface IngredientApplication {
     public Mono<IngredientDTOOutput> add(IngredientDTOInput dto);
     public Mono<IngredientDTOOutput> get(UUID id);
+    public Mono<IngredientDTOOutput> update(UUID id, IngredientDTOInput dto);
 }
