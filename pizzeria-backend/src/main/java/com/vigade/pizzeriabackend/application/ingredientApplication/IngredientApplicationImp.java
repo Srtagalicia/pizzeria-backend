@@ -3,9 +3,11 @@ package com.vigade.pizzeriabackend.application.ingredientApplication;
 import java.util.UUID;
 import com.vigade.pizzeriabackend.core.baseClasses.ApplicationBase;
 import com.vigade.pizzeriabackend.domain.ingredientDomain.Ingredient;
+import com.vigade.pizzeriabackend.domain.ingredientDomain.IngredientProjection;
 import com.vigade.pizzeriabackend.domain.ingredientDomain.IngredientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import org.modelmapper.ModelMapper;
 
@@ -49,5 +51,9 @@ public class IngredientApplicationImp extends ApplicationBase<Ingredient, UUID> 
             return this.ingredientRepository.delete(monoIngredient);
         });
     }
+
+    @Override
+    public Flux<IngredientProjection> getAll() {
+        return this.ingredientRepository.getAll();
     }
 }
