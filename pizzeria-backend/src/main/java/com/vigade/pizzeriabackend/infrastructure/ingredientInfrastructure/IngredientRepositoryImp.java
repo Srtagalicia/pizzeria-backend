@@ -2,9 +2,11 @@ package com.vigade.pizzeriabackend.infrastructure.ingredientInfrastructure;
 
 import java.util.UUID;
 import com.vigade.pizzeriabackend.domain.ingredientDomain.Ingredient;
+import com.vigade.pizzeriabackend.domain.ingredientDomain.IngredientProjection;
 import com.vigade.pizzeriabackend.domain.ingredientDomain.IngredientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Repository
@@ -35,5 +37,10 @@ public class IngredientRepositoryImp implements IngredientRepository {
     @Override
     public Mono<Void> delete(Ingredient ingredient) {
         return this.ingredientReactiveRepository.delete(ingredient);
+    }
+
+    @Override
+    public Flux<IngredientProjection> getAll() {
+        return this.ingredientReactiveRepository.findAllIngredients();
     }
 }
