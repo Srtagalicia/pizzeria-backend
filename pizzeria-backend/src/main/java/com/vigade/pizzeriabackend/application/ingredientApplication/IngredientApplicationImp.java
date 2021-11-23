@@ -25,6 +25,7 @@ public class IngredientApplicationImp implements IngredientApplication {
         Ingredient ingredient = this.modelMapper.map(ingredientDTOInput, Ingredient.class);
         ingredient.setId(UUID.randomUUID());
         ingredient.setThisNew(true);
-        return this.ingredientRepository.add(ingredient).flatMap(monoIngredient->Mono.just(this.modelMapper.map(monoIngredient, IngredientDTOOutput.class)));
+        return this.ingredientRepository.add(ingredient).flatMap(monoIngredient -> Mono.just(this.modelMapper.map(monoIngredient, IngredientDTOOutput.class)));
+    }
     }
 }
