@@ -1,10 +1,13 @@
 package com.vigade.pizzeriabackend.controller;
 
+import java.util.UUID;
 import com.vigade.pizzeriabackend.application.ingredientApplication.IngredientApplication;
 import com.vigade.pizzeriabackend.application.ingredientApplication.IngredientDTOInput;
 import com.vigade.pizzeriabackend.application.ingredientApplication.IngredientDTOOutput;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,4 +31,10 @@ public class IngredientController {
     public Mono<IngredientDTOOutput> addIngredient(@RequestBody IngredientDTOInput ingredientDTOInput) {
         return this.ingredientApplication.add(ingredientDTOInput);
     }
+
+	@GetMapping("/{id}")
+	@ResponseStatus(HttpStatus.OK)
+	public Mono<IngredientDTOOutput> getIngredient(@PathVariable UUID id) {
+		return this.ingredientApplication.get(id);
+	}
 }
