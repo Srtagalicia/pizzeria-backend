@@ -1,6 +1,7 @@
 package com.vigade.pizzeriabackend.application.ingredientApplication;
 
 import java.util.UUID;
+import com.vigade.pizzeriabackend.core.baseClasses.ApplicationBase;
 import com.vigade.pizzeriabackend.domain.ingredientDomain.Ingredient;
 import com.vigade.pizzeriabackend.domain.ingredientDomain.IngredientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,13 +10,14 @@ import reactor.core.publisher.Mono;
 import org.modelmapper.ModelMapper;
 
 @Service
-public class IngredientApplicationImp implements IngredientApplication {
+public class IngredientApplicationImp extends ApplicationBase<Ingredient, UUID> implements IngredientApplication {
     
     private IngredientRepository ingredientRepository;
     private ModelMapper modelMapper;
 
     @Autowired
     public IngredientApplicationImp(IngredientRepository ingredientRepository, ModelMapper modelMapper) {
+        super(id -> ingredientRepository.findById(id));
         this.ingredientRepository = ingredientRepository;
         this.modelMapper = modelMapper;
     }
