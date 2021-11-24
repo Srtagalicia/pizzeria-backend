@@ -9,11 +9,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import reactor.core.publisher.Mono;
 
 @RestController
-@RequestMapping("/api/v1/users")
+@RequestMapping("/users")
 public class UserController {
     private UserApplication userApplication;
 
@@ -26,7 +25,6 @@ public class UserController {
     public Mono<ResponseEntity<UserDTO>> create(@RequestBody UserDTOCreate dto){
         Mono<UserDTO> userDTO = this.userApplication.add(dto);
         return userDTO.flatMap(user -> {
-            //TODO: set user type and token
             return Mono.just(ResponseEntity.status(201).body(user));
         });
     }

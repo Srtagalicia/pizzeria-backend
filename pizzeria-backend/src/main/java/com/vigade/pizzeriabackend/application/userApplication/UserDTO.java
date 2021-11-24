@@ -15,7 +15,7 @@ public @NoArgsConstructor @Getter @Setter class UserDTO {
 
     private String email;
 
-    private String passw;
+    private String token;
 
     private String type;
 	

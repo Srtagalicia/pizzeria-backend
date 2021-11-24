@@ -1,9 +1,10 @@
 package com.vigade.pizzeriabackend.application.userApplication;
 
 import java.util.UUID;
+
+import com.vigade.pizzeriabackend.application.security.JwtUtils;
 import com.vigade.pizzeriabackend.domain.userDomain.User;
 import com.vigade.pizzeriabackend.domain.userDomain.UserRepository;
-
 import org.mindrot.jbcrypt.BCrypt;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,10 @@ public class UserApplicationImp implements UserApplication{ //TODO: extends Appl
         //TODO: validate email
 
         return this.userRepository.add(user).flatMap(dbUser -> {
-            return Mono.just(modelMapper.map(dbUser, UserDTO.class));
+            UserDTO userDto = modelMapper.map(dbUser, UserDTO.class);
+            userDto.setType("Bearer");
+            userDto.setToken(JwtUtils.generatetJwtToken(userDto.getName()));
+            return Mono.just(userDto);
         });
     }
 }
