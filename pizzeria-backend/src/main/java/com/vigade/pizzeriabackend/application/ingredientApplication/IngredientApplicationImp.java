@@ -38,10 +38,10 @@ public class IngredientApplicationImp extends ApplicationBase<Ingredient, UUID> 
     }
 
     @Override
-    public Mono<IngredientDTOOutput> update(UUID id, IngredientDTOInput ingredientDTOInput) {
+    public Mono<Void> update(UUID id, IngredientDTOInput ingredientDTOInput) {
         return this.getById(id).flatMap(monoIngredient -> {
             this.modelMapper.map(ingredientDTOInput, monoIngredient);
-            return this.ingredientRepository.update(monoIngredient).flatMap(updatedMonoIngredient -> Mono.just(this.modelMapper.map(updatedMonoIngredient, IngredientDTOOutput.class)));
+            return this.ingredientRepository.update(monoIngredient).flatMap(updatedMonoIngredient -> Mono.empty());
         });
     }
 
