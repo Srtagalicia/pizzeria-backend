@@ -40,7 +40,7 @@ public class IngredientRepositoryImp implements IngredientRepository {
     }
 
     @Override
-    public Flux<IngredientProjection> getAll() {
-        return this.ingredientReactiveRepository.findAllIngredients();
+    public Flux<IngredientProjection> getAll(String name, Integer limit, Integer offset) {
+        return this.ingredientReactiveRepository.findAllIngredients(name, limit, offset);
     }
 }
