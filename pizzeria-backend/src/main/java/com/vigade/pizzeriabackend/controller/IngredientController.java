@@ -33,31 +33,31 @@ public class IngredientController {
 
 	@PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Mono<IngredientDTOOutput> addIngredient(@RequestBody IngredientDTOInput ingredientDTOInput) {
+    public Mono<IngredientDTOOutput> add(@RequestBody IngredientDTOInput ingredientDTOInput) {
         return this.ingredientApplication.add(ingredientDTOInput);
     }
 
 	@GetMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public Mono<IngredientDTOOutput> getIngredient(@PathVariable UUID id) {
+	public Mono<IngredientDTOOutput> get(@PathVariable UUID id) {
 		return this.ingredientApplication.get(id);
 	}
 
 	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public Mono<Void> updateIngredient(@PathVariable UUID id, @RequestBody IngredientDTOInput ingredientDTOInput) {
+	public Mono<Void> update(@PathVariable UUID id, @RequestBody IngredientDTOInput ingredientDTOInput) {
 		return this.ingredientApplication.update(id, ingredientDTOInput);
 	}
 
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public Mono<Void> deleteIngredient(@PathVariable UUID id) {
+	public Mono<Void> delete(@PathVariable UUID id) {
 		return this.ingredientApplication.delete(id);
 	}
 
 	@GetMapping
 	@ResponseStatus(HttpStatus.OK)
-	public Flux<IngredientProjection> getAllIngredients(
+	public Flux<IngredientProjection> getAll(
 		@RequestParam(required = false) String name,
 		@RequestParam(defaultValue = "10") Integer limit,
 		@RequestParam(defaultValue = "0") Integer offset
