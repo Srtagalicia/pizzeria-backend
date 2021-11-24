@@ -50,7 +50,7 @@ public class IngredientController {
 	}
 
 	@DeleteMapping("/{id}")
-	@ResponseStatus(HttpStatus.OK)
+	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public Mono<Void> deleteIngredient(@PathVariable UUID id) {
 		return this.ingredientApplication.delete(id);
 	}
