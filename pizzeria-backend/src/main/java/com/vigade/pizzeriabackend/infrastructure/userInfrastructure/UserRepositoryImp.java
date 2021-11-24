@@ -1,5 +1,7 @@
 package com.vigade.pizzeriabackend.infrastructure.userInfrastructure;
 
+import java.util.UUID;
+
 import com.vigade.pizzeriabackend.domain.userDomain.User;
 import com.vigade.pizzeriabackend.domain.userDomain.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,5 +21,10 @@ public class UserRepositoryImp implements UserRepository{
     @Override
     public Mono<User> add(User user) {
         return this.userReactiveRepository.save(user);
+    }
+
+    @Override
+    public Mono<User> findById(UUID id) {
+        return this.userReactiveRepository.findById(id);
     }
 }

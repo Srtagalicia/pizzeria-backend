@@ -1,7 +1,9 @@
 package com.vigade.pizzeriabackend.domain.userDomain;
 
-import com.vigade.pizzeriabackend.core.EntityBase;
+
 import org.springframework.data.relational.core.mapping.Table;
+
+import com.vigade.pizzeriabackend.core.baseClasses.EntityBase;
 import org.springframework.data.relational.core.mapping.Column;
 import lombok.Getter;
 import lombok.Setter;

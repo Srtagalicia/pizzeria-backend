@@ -21,7 +21,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
-@RequestMapping("/ingredients")
+@RequestMapping("/api/v1//ingredients")
 public class IngredientController {
 	
 	private IngredientApplication ingredientApplication;

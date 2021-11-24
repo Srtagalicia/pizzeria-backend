@@ -2,21 +2,24 @@ package com.vigade.pizzeriabackend.application.userApplication;
 
 import java.util.UUID;
 
-import com.vigade.pizzeriabackend.application.security.JwtUtils;
+import com.vigade.pizzeriabackend.core.baseClasses.ApplicationBase;
 import com.vigade.pizzeriabackend.domain.userDomain.User;
 import com.vigade.pizzeriabackend.domain.userDomain.UserRepository;
+import com.vigade.pizzeriabackend.security.JwtUtils;
+
 import org.mindrot.jbcrypt.BCrypt;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
 @Service
-public class UserApplicationImp implements UserApplication{ //TODO: extends ApplicationBase
+public class UserApplicationImp extends ApplicationBase<User, UUID> implements UserApplication{
 
     private UserRepository userRepository;
     private ModelMapper modelMapper;
 
     public UserApplicationImp (UserRepository userRepository, ModelMapper modelMapper) {
+        super(id -> userRepository.findById(id));
         this.userRepository = userRepository;
         this.modelMapper = modelMapper;
     }
@@ -32,7 +35,7 @@ public class UserApplicationImp implements UserApplication{ //TODO: extends Appl
         return this.userRepository.add(user).flatMap(dbUser -> {
             UserDTO userDto = modelMapper.map(dbUser, UserDTO.class);
             userDto.setType("Bearer");
-            userDto.setToken(JwtUtils.generatetJwtToken(userDto.getName()));
+            //userDto.setToken(JwtUtils.generatetJwtToken(userDto.getName()));
             return Mono.just(userDto);
         });
     }
