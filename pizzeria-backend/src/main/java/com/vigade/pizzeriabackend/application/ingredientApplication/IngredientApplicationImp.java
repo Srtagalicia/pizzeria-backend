@@ -53,7 +53,7 @@ public class IngredientApplicationImp extends ApplicationBase<Ingredient, UUID> 
     }
 
     @Override
-    public Flux<IngredientProjection> getAll() {
-        return this.ingredientRepository.getAll();
+    public Flux<IngredientProjection> getAll(String name, Integer limit, Integer offset) {
+        return this.ingredientRepository.getAll(name, limit, offset);
     }
 }
