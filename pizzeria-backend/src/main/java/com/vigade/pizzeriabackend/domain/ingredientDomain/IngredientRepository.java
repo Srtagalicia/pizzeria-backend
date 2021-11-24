@@ -1,7 +1,13 @@
 package com.vigade.pizzeriabackend.domain.ingredientDomain;
 
+import java.util.UUID;
+import com.vigade.pizzeriabackend.core.functionalInterfaces.FindById;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-public interface IngredientRepository {
-    Mono<Ingredient> add(Ingredient ingredient);
+public interface IngredientRepository extends FindById<Ingredient, UUID> {
+    public Mono<Ingredient> add(Ingredient ingredient);
+    public Mono<Ingredient> update(Ingredient ingredient);
+    public Mono<Void> delete(Ingredient ingredient);
+    public Flux<IngredientProjection> getAll(String name, Integer limit, Integer offset);
 }
