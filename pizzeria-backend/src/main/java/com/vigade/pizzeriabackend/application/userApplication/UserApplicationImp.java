@@ -6,9 +6,9 @@ import com.vigade.pizzeriabackend.core.baseClasses.ApplicationBase;
 import com.vigade.pizzeriabackend.domain.userDomain.User;
 import com.vigade.pizzeriabackend.domain.userDomain.UserRepository;
 import com.vigade.pizzeriabackend.security.JwtUtils;
-
 import org.mindrot.jbcrypt.BCrypt;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
@@ -18,6 +18,7 @@ public class UserApplicationImp extends ApplicationBase<User, UUID> implements U
     private UserRepository userRepository;
     private ModelMapper modelMapper;
 
+    @Autowired
     public UserApplicationImp (UserRepository userRepository, ModelMapper modelMapper) {
         super(id -> userRepository.findById(id));
         this.userRepository = userRepository;
@@ -25,18 +26,17 @@ public class UserApplicationImp extends ApplicationBase<User, UUID> implements U
     }
 
     @Override
-    public Mono<UserDTO> add(UserDTOCreate dto) {
-        User user  = modelMapper.map(dto, User.class);
+    public Mono<UserDTOOutput> add(UserDTOCreate dto) {
+        User user  = this.modelMapper.map(dto, User.class);
         user.setId(UUID.randomUUID());
         user.setPassw(BCrypt.hashpw(user.getPassw(), BCrypt.gensalt()));
         user.setThisNew(true);
         //TODO: validate email
+        
+        UserDTOOutput userDTO = this.modelMapper.map(user, UserDTOOutput.class);
+        userDTO.setType("Bearer");
+        userDTO.setToken(JwtUtils.generatetJwtToken(user));
 
-        return this.userRepository.add(user).flatMap(dbUser -> {
-            UserDTO userDto = modelMapper.map(dbUser, UserDTO.class);
-            userDto.setType("Bearer");
-            //userDto.setToken(JwtUtils.generatetJwtToken(userDto.getName()));
-            return Mono.just(userDto);
-        });
+        return this.userRepository.add(user).then(Mono.just(userDTO));        
     }
 }

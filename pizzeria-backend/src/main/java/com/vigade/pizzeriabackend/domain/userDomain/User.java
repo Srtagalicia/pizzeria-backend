@@ -27,5 +27,5 @@ public @NoArgsConstructor @Getter @Setter class User extends EntityBase {
     private String type;
 	
     @Column("role")
-    private Role role;
+    private Role role = Role.CUSTOMER;
 }
