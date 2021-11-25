@@ -29,7 +29,8 @@ public class IngredientApplicationImp extends ApplicationBase<Ingredient, UUID> 
         Ingredient ingredient = this.modelMapper.map(ingredientDTOInput, Ingredient.class);
         ingredient.setId(UUID.randomUUID());
         ingredient.setThisNew(true);
-        return this.ingredientRepository.add(ingredient).flatMap(monoIngredient -> Mono.just(this.modelMapper.map(monoIngredient, IngredientDTOOutput.class)));
+        return ingredient.validate("name", ingredient.getName(), name -> this.ingredientRepository.existsByField(name))
+            .then(this.ingredientRepository.add(ingredient).flatMap(monoIngredient -> Mono.just(this.modelMapper.map(monoIngredient, IngredientDTOOutput.class))));
     }
 
     @Override
@@ -38,10 +39,16 @@ public class IngredientApplicationImp extends ApplicationBase<Ingredient, UUID> 
     }
 
     @Override
-    public Mono<IngredientDTOOutput> update(UUID id, IngredientDTOInput ingredientDTOInput) {
+    public Mono<Void> update(UUID id, IngredientDTOInput ingredientDTOInput) {
         return this.getById(id).flatMap(monoIngredient -> {
+            if(monoIngredient.getName().equals(ingredientDTOInput.getName())) {
+                this.modelMapper.map(ingredientDTOInput, monoIngredient);
+                monoIngredient.validate();
+                return this.ingredientRepository.update(monoIngredient).then(Mono.empty());
+            }
             this.modelMapper.map(ingredientDTOInput, monoIngredient);
-            return this.ingredientRepository.update(monoIngredient).flatMap(updatedMonoIngredient -> Mono.just(this.modelMapper.map(updatedMonoIngredient, IngredientDTOOutput.class)));
+            return monoIngredient.validate("name", monoIngredient.getName(), name -> this.ingredientRepository.existsByField(name))
+                .then(this.ingredientRepository.update(monoIngredient)).then(Mono.empty());
         });
     }
 

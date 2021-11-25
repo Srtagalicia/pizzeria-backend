@@ -43,4 +43,9 @@ public class IngredientRepositoryImp implements IngredientRepository {
     public Flux<IngredientProjection> getAll(String name, Integer limit, Integer offset) {
         return this.ingredientReactiveRepository.findAllIngredients(name, limit, offset);
     }
+
+    @Override
+    public Mono<Boolean> existsByField(String name) {
+        return Mono.sequenceEqual(this.ingredientReactiveRepository.existsByName(name), Mono.just(1));
+    }
 }
