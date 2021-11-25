@@ -16,4 +16,6 @@ public @Getter @Setter class UserDTOOutput {
     private String type;
 
     private String expirer = "36000000";
+
+    private String refreshToken;
 }

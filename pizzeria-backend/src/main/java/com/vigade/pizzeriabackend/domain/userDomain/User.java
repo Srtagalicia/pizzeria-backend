@@ -1,8 +1,6 @@
 package com.vigade.pizzeriabackend.domain.userDomain;
 
-
 import org.springframework.data.relational.core.mapping.Table;
-
 import com.vigade.pizzeriabackend.core.baseClasses.EntityBase;
 import org.springframework.data.relational.core.mapping.Column;
 import lombok.Getter;
@@ -22,10 +20,18 @@ public @NoArgsConstructor @Getter @Setter class User extends EntityBase {
 
     @Column("passw")
     private String passw;
-
-    @Column("type")
-    private String type;
 	
     @Column("role")
     private Role role = Role.CUSTOMER;
+
+    @Column("provider")
+    private Provider provider;
+
+    @Column("retries")
+    private Integer retries;
+
+    @Column("state")
+    private State state = State.ACTIVE;
+
+
 }
