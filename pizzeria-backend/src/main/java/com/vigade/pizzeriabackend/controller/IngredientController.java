@@ -46,7 +46,7 @@ public class IngredientController {
 
 	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public Mono<Void> update(@PathVariable UUID id, @RequestBody IngredientDTOInput ingredientDTOInput) {
+	public Mono<Void> update(@PathVariable UUID id, @Valid @RequestBody IngredientDTOInput ingredientDTOInput) {
 		return this.ingredientApplication.update(id, ingredientDTOInput);
 	}
 
