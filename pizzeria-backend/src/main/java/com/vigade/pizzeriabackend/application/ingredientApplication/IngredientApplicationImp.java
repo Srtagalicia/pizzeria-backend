@@ -29,7 +29,8 @@ public class IngredientApplicationImp extends ApplicationBase<Ingredient, UUID> 
         Ingredient ingredient = this.modelMapper.map(ingredientDTOInput, Ingredient.class);
         ingredient.setId(UUID.randomUUID());
         ingredient.setThisNew(true);
-        return this.ingredientRepository.add(ingredient).flatMap(monoIngredient -> Mono.just(this.modelMapper.map(monoIngredient, IngredientDTOOutput.class)));
+        return ingredient.validate("name", ingredient.getName(), name -> this.ingredientRepository.existsByField(name))
+            .then(this.ingredientRepository.add(ingredient).flatMap(monoIngredient -> Mono.just(this.modelMapper.map(monoIngredient, IngredientDTOOutput.class))));
     }
 
     @Override
