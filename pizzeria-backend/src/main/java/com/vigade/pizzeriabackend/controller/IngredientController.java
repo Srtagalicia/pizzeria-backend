@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/v1/ingredients")
@@ -33,7 +34,7 @@ public class IngredientController {
 
 	@PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Mono<IngredientDTOOutput> add(@RequestBody IngredientDTOInput ingredientDTOInput) {
+    public Mono<IngredientDTOOutput> add(@Valid @RequestBody IngredientDTOInput ingredientDTOInput) {
         return this.ingredientApplication.add(ingredientDTOInput);
     }
 
