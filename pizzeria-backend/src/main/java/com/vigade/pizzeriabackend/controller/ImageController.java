@@ -28,10 +28,10 @@ public class ImageController {
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public void upload(@RequestParam("image") MultipartFile file) throws IOException {
-        //CreateOrUpdateImageDTO createOrUpdateImageDTO = new CreateOrUpdateImageDTO();
-        //createOrUpdateImageDTO.setData(file.getBytes());
-        //return imageApplication.add(createOrUpdateImageDTO);
+    public Mono<ImageDTO> upload(@RequestParam("image") MultipartFile file) throws IOException {
+        CreateOrUpdateImageDTO createOrUpdateImageDTO = new CreateOrUpdateImageDTO();
+        createOrUpdateImageDTO.setData(file.getBytes());
+        return imageApplication.add(createOrUpdateImageDTO);
        
     }
    
