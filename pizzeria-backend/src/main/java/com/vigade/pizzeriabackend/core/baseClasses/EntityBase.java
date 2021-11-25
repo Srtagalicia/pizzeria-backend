@@ -13,6 +13,8 @@ import javax.validation.ValidatorFactory;
 import javax.validation.Validator;
 import javax.validation.ConstraintViolation;
 import com.vigade.pizzeriabackend.core.exceptions.BadRequestException;
+import com.vigade.pizzeriabackend.core.functionalInterfaces.ExistsByField;
+import reactor.core.publisher.Mono;
 
 @Validated
 public @Getter @Setter abstract class EntityBase implements Persistable<UUID> {
@@ -34,6 +36,18 @@ public @Getter @Setter abstract class EntityBase implements Persistable<UUID> {
             }
             throw badRequestException;
         }
+    }
+
+    public Mono<Void> validate(String fieldName, String fieldValue, ExistsByField existsByField) {
+        this.validate();
+        return existsByField.existsByField(fieldValue).flatMap(exists -> {
+            if(exists) {
+                BadRequestException badRequestException = new BadRequestException();
+                badRequestException.addException(fieldName, String.format("Value '%s' for field '%s' already exists.", fieldValue, fieldName));    
+                return Mono.error(badRequestException);
+            }
+            return Mono.empty();
+        });
     }
 
     @Override
