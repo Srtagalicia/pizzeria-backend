@@ -18,17 +18,17 @@ public @NoArgsConstructor @Getter @Setter class User extends EntityBase {
     @Column("email")
     private String email;
 
-    @Column("passw")
-    private String passw;
+    @Column("password")
+    private String password;
 	
     @Column("role")
     private Role role = Role.CUSTOMER;
 
     @Column("provider")
-    private Provider provider;
+    private Provider provider = Provider.LOGIN;
 
     @Column("retries")
-    private Integer retries;
+    private Integer retries = 0;
 
     @Column("state")
     private State state = State.ACTIVE;

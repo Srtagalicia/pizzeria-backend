@@ -5,7 +5,7 @@ import java.util.UUID;
 import com.vigade.pizzeriabackend.core.baseClasses.ApplicationBase;
 import com.vigade.pizzeriabackend.domain.userDomain.User;
 import com.vigade.pizzeriabackend.domain.userDomain.UserRepository;
-import com.vigade.pizzeriabackend.security.JwtUtils;
+import com.vigade.pizzeriabackend.application.userApplication.security.JwtUtils;
 import org.mindrot.jbcrypt.BCrypt;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ public class UserApplicationImp extends ApplicationBase<User, UUID> implements U
     public Mono<UserDTOOutput> add(UserDTOCreate dto) {
         User user  = this.modelMapper.map(dto, User.class);
         user.setId(UUID.randomUUID());
-        user.setPassw(BCrypt.hashpw(user.getPassw(), BCrypt.gensalt()));
+        user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
         user.setThisNew(true);
         //TODO: validate email
         
@@ -37,6 +37,6 @@ public class UserApplicationImp extends ApplicationBase<User, UUID> implements U
         userDTO.setType("Bearer");
         userDTO.setToken(JwtUtils.generatetJwtToken(user));
 
-        return this.userRepository.add(user).then(Mono.just(userDTO));        
+        return this.userRepository.add(user).then(Mono.just(userDTO));
     }
 }

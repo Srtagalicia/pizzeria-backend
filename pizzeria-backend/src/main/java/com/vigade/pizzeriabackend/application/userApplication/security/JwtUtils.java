@@ -1,4 +1,4 @@
-package com.vigade.pizzeriabackend.security;
+package com.vigade.pizzeriabackend.application.userApplication.security;
 
 import java.util.Date;
 import com.vigade.pizzeriabackend.domain.userDomain.User;
@@ -8,8 +8,6 @@ import io.jsonwebtoken.SignatureAlgorithm;
 public class JwtUtils {
     public static String generatetJwtToken(User user) {
 		String secretKey = System.getenv("SECRET_KEY");
-		//List<GrantedAuthority> grantedAuthorities = AuthorityUtils
-		//		.commaSeparatedStringToAuthorityList("USER");
 		
 		String token = Jwts
 			.builder()
@@ -23,9 +21,5 @@ public class JwtUtils {
 			.compact();
 
 		return token;
-						//.claim("authorities",
-				//	grantedAuthorities.stream()
-				//		.map(GrantedAuthority::getAuthority)
-				//		.collect(Collectors.toList()))
 	}
 }

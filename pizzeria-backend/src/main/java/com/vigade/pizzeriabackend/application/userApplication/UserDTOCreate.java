@@ -4,11 +4,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 public @Getter @Setter class UserDTOCreate {
-    private String name;
+    private String firstName;
 
-    private String surname;
+    private String lastName;
 
     private String email;
 
-    private String passw;
+    private String password;
 }
