@@ -1,7 +1,6 @@
 package com.vigade.pizzeriabackend.infrastructure.userInfrastructure;
 
 import java.util.UUID;
-
 import com.vigade.pizzeriabackend.domain.userDomain.User;
 import com.vigade.pizzeriabackend.domain.userDomain.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

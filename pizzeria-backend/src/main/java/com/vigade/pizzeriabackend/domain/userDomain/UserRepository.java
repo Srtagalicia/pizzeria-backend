@@ -5,5 +5,5 @@ import com.vigade.pizzeriabackend.core.functionalInterfaces.FindById;
 import reactor.core.publisher.Mono;
 
 public interface UserRepository extends FindById<User, UUID>{
-    Mono<User> add(User user);
+    public Mono<User> add(User user);
 }

@@ -9,11 +9,12 @@ import lombok.NoArgsConstructor;
 
 @Table("users")
 public @NoArgsConstructor @Getter @Setter class User extends EntityBase {
-    @Column("name")
-    private String name;
+    
+    @Column("firstName")
+    private String firstName;
 
-    @Column("surname")
-    private String surname;
+    @Column("lastName")
+    private String lastName;
 
     @Column("email")
     private String email;
