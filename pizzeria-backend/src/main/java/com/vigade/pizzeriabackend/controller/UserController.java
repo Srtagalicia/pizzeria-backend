@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/v1/users")
@@ -25,7 +26,7 @@ public class UserController {
 
     @PostMapping("/register/customer")
     @ResponseStatus(HttpStatus.CREATED)
-    public Mono<UserDTOOutput> addCustomer(@RequestBody UserDTOCreate userDTOCreate){
+    public Mono<UserDTOOutput> addCustomer(@Valid @RequestBody UserDTOCreate userDTOCreate){
         return this.userApplication.add(userDTOCreate);
     }
 }
