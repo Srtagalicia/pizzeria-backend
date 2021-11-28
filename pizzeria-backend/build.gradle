@@ -21,8 +21,10 @@ dependencies {
   	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'io.projectreactor:reactor-test'
-	implementation 'org.modelmapper:modelmapper:2.4.2'
+	implementation 'org.modelmapper:modelmapper:2.4.4'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	//Reactive redis
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis-reactive'
 	//implementation 'io.r2dbc:r2dbc-pool'
 	implementation 'dev.miku:r2dbc-mysql'
 	//implementation 'org.liquibase:liquibase-core'

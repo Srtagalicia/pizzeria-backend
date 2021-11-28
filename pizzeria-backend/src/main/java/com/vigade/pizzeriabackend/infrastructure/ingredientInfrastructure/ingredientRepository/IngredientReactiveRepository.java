@@ -1,4 +1,4 @@
-package com.vigade.pizzeriabackend.infrastructure.ingredientInfrastructure;
+package com.vigade.pizzeriabackend.infrastructure.ingredientInfrastructure.ingredientRepository;
 
 import java.util.UUID;
 import com.vigade.pizzeriabackend.domain.ingredientDomain.Ingredient;

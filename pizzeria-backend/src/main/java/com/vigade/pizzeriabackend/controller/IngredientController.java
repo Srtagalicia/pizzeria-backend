@@ -24,7 +24,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/api/v1/ingredients")
 public class IngredientController {
-	
+
 	private IngredientApplication ingredientApplication;
 
 	@Autowired
@@ -33,10 +33,10 @@ public class IngredientController {
 	}
 
 	@PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public Mono<IngredientDTOOutput> add(@Valid @RequestBody IngredientDTOInput ingredientDTOInput) {
-        return this.ingredientApplication.add(ingredientDTOInput);
-    }
+	@ResponseStatus(HttpStatus.CREATED)
+	public Mono<IngredientDTOOutput> add(@Valid @RequestBody IngredientDTOInput ingredientDTOInput) {
+		return this.ingredientApplication.add(ingredientDTOInput);
+	}
 
 	@GetMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
@@ -59,10 +59,9 @@ public class IngredientController {
 	@GetMapping
 	@ResponseStatus(HttpStatus.OK)
 	public Flux<IngredientProjection> getAll(
-		@RequestParam(required = false) String name,
-		@RequestParam(defaultValue = "10") Integer limit,
-		@RequestParam(defaultValue = "0") Integer offset
-	) {
+			@RequestParam(required = false) String name,
+			@RequestParam(defaultValue = "10") Integer limit,
+			@RequestParam(defaultValue = "0") Integer offset) {
 		return this.ingredientApplication.getAll(name, limit, offset);
 	}
 }
