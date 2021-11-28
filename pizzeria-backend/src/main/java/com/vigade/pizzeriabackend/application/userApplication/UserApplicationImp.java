@@ -37,11 +37,4 @@ public class UserApplicationImp extends ApplicationBase<User,UUID> implements Us
         return user.validate("email", user.getEmail(), email -> this.userRepository.existsByField(email))
             .then(this.userRepository.add(user)).then(Mono.just(userDTOOutput));
     }
-
-    /*
-    @Override
-    public Mono<UserDTOOutput> me(String id) {
-
-    }
-    */
 }
