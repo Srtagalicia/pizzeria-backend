@@ -4,5 +4,4 @@ import reactor.core.publisher.Mono;
 
 public interface UserApplication {
     public Mono<UserDTOOutput> add(UserDTOCreate dto);
-    //public Mono<UserDTOOutput> me(String id);
 }

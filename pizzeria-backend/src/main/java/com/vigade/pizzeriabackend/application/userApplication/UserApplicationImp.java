@@ -4,7 +4,9 @@ import java.util.UUID;
 import com.aventrix.jnanoid.jnanoid.NanoIdUtils;
 import com.vigade.pizzeriabackend.core.baseClasses.ApplicationBase;
 import com.vigade.pizzeriabackend.domain.userDomain.User;
+import com.vigade.pizzeriabackend.domain.userDomain.UserRedis;
 import com.vigade.pizzeriabackend.domain.userDomain.UserRepository;
+import com.vigade.pizzeriabackend.domain.userDomain.UserRepositoryRedis;
 import com.vigade.pizzeriabackend.security.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,12 +18,18 @@ import org.mindrot.jbcrypt.BCrypt;
 public class UserApplicationImp extends ApplicationBase<User,UUID> implements UserApplication {
 
     private UserRepository userRepository;
+    private UserRepositoryRedis userRepositoryRedis;
     private ModelMapper modelMapper;
 
     @Autowired
-    public UserApplicationImp(UserRepository userRepository, ModelMapper modelMapper) {
+    public UserApplicationImp(
+        UserRepository userRepository,
+        UserRepositoryRedis userRepositoryRedis,
+        ModelMapper modelMapper
+    ) {
         super(id -> userRepository.findById(id));
         this.userRepository = userRepository;
+        this.userRepositoryRedis = userRepositoryRedis;
         this.modelMapper = modelMapper;
     }
 
@@ -34,14 +42,17 @@ public class UserApplicationImp extends ApplicationBase<User,UUID> implements Us
         UserDTOOutput userDTOOutput = new UserDTOOutput();
         userDTOOutput.setAccessToken(JwtUtils.generatetJwtToken(user));
         userDTOOutput.setRefreshToken(NanoIdUtils.randomNanoId());
+        UserRedis userRedis = new UserRedis();
+        userRedis.setId(user.getId().toString());
+        userRedis.setFirstName(user.getFirstName());
+        userRedis.setLastName(user.getLastName());
+        userRedis.setEmail(user.getEmail());
+        userRedis.setRole(user.getRole().toString());
+        userRedis.setAccessToken(userDTOOutput.getAccessToken());
+        userRedis.setRefreshToken(userDTOOutput.getRefreshToken());
         return user.validate("email", user.getEmail(), email -> this.userRepository.existsByField(email))
-            .then(this.userRepository.add(user)).then(Mono.just(userDTOOutput));
+            .then(this.userRepository.add(user))
+            .then(this.userRepositoryRedis.add(userRedis))
+            .then(Mono.just(userDTOOutput));
     }
-
-    /*
-    @Override
-    public Mono<UserDTOOutput> me(String id) {
-
-    }
-    */
 }
