@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Mono;
 
 @Repository
-public class UserRepositoryImp implements UserRepository{
+public class UserRepositoryImp implements UserRepository {
 
     private UserReactiveRepository userReactiveRepository;
 
@@ -25,5 +25,10 @@ public class UserRepositoryImp implements UserRepository{
     @Override
     public Mono<User> findById(UUID id) {
         return this.userReactiveRepository.findById(id);
+    }
+
+    @Override
+    public Mono<Boolean> existsByField(String email) {
+        return Mono.sequenceEqual(this.userReactiveRepository.existsByEmail(email), Mono.just(1));
     }
 }
