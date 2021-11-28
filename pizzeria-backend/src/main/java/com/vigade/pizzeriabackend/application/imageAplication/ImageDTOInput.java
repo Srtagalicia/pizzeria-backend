@@ -7,6 +7,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class CreateOrUpdateImageDTO {
+public class ImageDTOInput {
     public byte[] data;
 }

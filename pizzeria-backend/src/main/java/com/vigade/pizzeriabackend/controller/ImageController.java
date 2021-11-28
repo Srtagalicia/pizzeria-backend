@@ -1,7 +1,7 @@
 package com.vigade.pizzeriabackend.controller;
 
 import java.io.IOException;
-import com.vigade.pizzeriabackend.application.imageAplication.CreateOrUpdateImageDTO;
+import com.vigade.pizzeriabackend.application.imageAplication.ImageDTOInput;
 import com.vigade.pizzeriabackend.application.imageAplication.ImageApplication;
 import com.vigade.pizzeriabackend.application.imageAplication.ImageDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ public class ImageController {
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public Mono<ImageDTO> upload(@RequestParam("image") MultipartFile file) throws IOException {
-        CreateOrUpdateImageDTO createOrUpdateImageDTO = new CreateOrUpdateImageDTO();
+        ImageDTOInput createOrUpdateImageDTO = new ImageDTOInput();
         createOrUpdateImageDTO.setData(file.getBytes());
         return imageApplication.add(createOrUpdateImageDTO);
        

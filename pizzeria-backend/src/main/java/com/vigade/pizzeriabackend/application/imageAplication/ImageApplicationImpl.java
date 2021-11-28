@@ -22,7 +22,7 @@ public class ImageApplicationImpl implements ImageApplication {
         this.modelMapper = modelMapper;
     }
 
-    public Mono<ImageDTO> add(CreateOrUpdateImageDTO dto) {
+    public Mono<ImageDTO> add(ImageDTOInput dto) {
         Image image = modelMapper.map(dto, Image.class);
         image.setId(UUID.randomUUID());
         image.setThisNew(true);
