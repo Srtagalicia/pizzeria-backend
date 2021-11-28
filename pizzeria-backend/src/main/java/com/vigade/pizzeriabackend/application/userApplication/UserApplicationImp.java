@@ -1,6 +1,7 @@
 package com.vigade.pizzeriabackend.application.userApplication;
 
 import java.util.UUID;
+import com.aventrix.jnanoid.jnanoid.NanoIdUtils;
 import com.vigade.pizzeriabackend.core.baseClasses.ApplicationBase;
 import com.vigade.pizzeriabackend.domain.userDomain.User;
 import com.vigade.pizzeriabackend.domain.userDomain.UserRepository;
@@ -32,8 +33,8 @@ public class UserApplicationImp extends ApplicationBase<User,UUID> implements Us
         user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
         UserDTOOutput userDTOOutput = new UserDTOOutput();
         userDTOOutput.setAccessToken(JwtUtils.generatetJwtToken(user));
-        userDTOOutput.setRefreshToken(JwtUtils.generatetJwtToken(user));
         return this.userRepository.add(user).then(Mono.just(userDTOOutput));
+        userDTOOutput.setRefreshToken(NanoIdUtils.randomNanoId());
     }
 
     /*
