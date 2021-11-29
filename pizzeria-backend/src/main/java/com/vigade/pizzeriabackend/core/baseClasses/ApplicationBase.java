@@ -15,4 +15,8 @@ public abstract class ApplicationBase<T,ID> {
     protected Mono<T> getById(ID id) {
         return this.getById.findById(id).switchIfEmpty(Mono.error(new NotFoundException()));
     }
+
+    protected String serializeObject(T entity, String message) {
+        return String.format("%s %s succesfully.", entity.toString(), message);
+    }
 }
