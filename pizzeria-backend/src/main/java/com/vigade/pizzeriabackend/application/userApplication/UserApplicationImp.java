@@ -54,10 +54,11 @@ public class UserApplicationImp extends ApplicationBase<User,UUID> implements Us
         userRedis.setRole(user.getRole().toString());
         userRedis.setAccessToken(userDTOOutput.getAccessToken());
         userRedis.setRefreshToken(userDTOOutput.getRefreshToken());
-        logger.info(this.serializeObject(user, "Added User"));
         return user.validate("email", user.getEmail(), email -> this.userRepository.existsByField(email))
-            .then(this.userRepository.add(user))
             .then(this.userRepositoryRedis.add(userRedis))
-            .then(Mono.just(userDTOOutput));
+            .then(this.userRepository.add(user)).flatMap(monoUser -> {
+                logger.info(this.serializeObject(monoUser, "Added User"));
+                return Mono.just(userDTOOutput);
+            });
     }
 }
