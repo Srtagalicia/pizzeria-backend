@@ -19,5 +19,4 @@ public class Image extends EntityBase {
 
     @Column
     private byte[] data;
-
 }
