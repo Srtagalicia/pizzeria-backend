@@ -17,7 +17,6 @@ public class JwtUtils {
             .builder()
 			.setId(UUID.randomUUID().toString())
 			.setSubject(user.getId().toString())
-			.claim("role", user.getRole())
 			.setIssuedAt(new Date(currentTime))
 			.setExpiration(new Date(currentTime + duration))
 			.signWith(SignatureAlgorithm.HS512, secretKey.getBytes())
