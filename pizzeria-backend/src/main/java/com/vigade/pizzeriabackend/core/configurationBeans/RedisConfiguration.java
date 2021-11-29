@@ -12,7 +12,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 public class RedisConfiguration {
 
     @Bean
-    ReactiveRedisOperations<String, byte[]> redisOperations(ReactiveRedisConnectionFactory factory) {
+    ReactiveRedisOperations<String, byte[]> bytesRedisOperations(ReactiveRedisConnectionFactory factory) {
         ByteSerializer byteSerializer = new ByteSerializer();
         RedisSerializationContext.RedisSerializationContextBuilder<String, byte[]> builder = RedisSerializationContext
             .newSerializationContext(new StringRedisSerializer());
