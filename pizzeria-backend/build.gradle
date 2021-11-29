@@ -28,6 +28,12 @@ dependencies {
 	//implementation 'io.r2dbc:r2dbc-pool'
 	implementation 'dev.miku:r2dbc-mysql'
 	//implementation 'org.liquibase:liquibase-core'
+	implementation 'org.mindrot:jbcrypt:0.4'
+	implementation 'io.jsonwebtoken:jjwt:0.9.1'
+	//implementation 'org.springframework.boot:spring-boot-starter-security'
+	testImplementation 'org.springframework.security:spring-security-test'
+	implementation 'javax.xml.bind:jaxb-api:2.3.1'
+	implementation 'com.aventrix.jnanoid:jnanoid:2.0.0'
 }
 
 application {
