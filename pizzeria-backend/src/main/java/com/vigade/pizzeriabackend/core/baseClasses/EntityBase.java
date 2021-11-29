@@ -8,6 +8,8 @@ import org.springframework.data.annotation.Transient;
 import org.springframework.validation.annotation.Validated;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
+
 import javax.validation.Validation;
 import javax.validation.ValidatorFactory;
 import javax.validation.Validator;
@@ -62,6 +64,11 @@ public @Getter @Setter abstract class EntityBase implements Persistable<UUID> {
         }
         EntityBase tmpEntity = (EntityBase) obj;
         return this.id.equals(tmpEntity.id);
+    }
+
+    @Override
+    public String toString() {
+        return this.id.toString();
     }
 
     @Override
