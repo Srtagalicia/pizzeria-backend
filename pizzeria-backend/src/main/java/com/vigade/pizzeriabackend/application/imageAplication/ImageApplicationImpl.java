@@ -29,4 +29,8 @@ public class ImageApplicationImpl implements ImageApplication {
         return this.imageRepository.add(image)
                 .flatMap(monoImage -> Mono.just(this.modelMapper.map(monoImage, ImageDTO.class)));
     }
+
+    public Mono<ImageDTO> getImageRedis(UUID id){
+        return this.imageRepository.getImageRedis(id).map(monoImage -> this.modelMapper.map(monoImage, ImageDTO.class));
+      }
 }
