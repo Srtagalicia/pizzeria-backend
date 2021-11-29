@@ -43,7 +43,7 @@ public @Getter @Setter abstract class EntityBase implements Persistable<UUID> {
         return existsByField.existsByField(fieldValue).flatMap(exists -> {
             if(exists) {
                 BadRequestException badRequestException = new BadRequestException();
-                badRequestException.addException(fieldName, String.format("Value '%s' for field '%s' already exists.", fieldValue, fieldName));    
+                badRequestException.addException(fieldName, String.format("Value '%s' for field '%s' already exists.", fieldValue, fieldName));
                 return Mono.error(badRequestException);
             }
             return Mono.empty();
