@@ -4,9 +4,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
-@Setter
-@NoArgsConstructor
-public class ImageDTOInput {
+public @NoArgsConstructor @Getter @Setter class ImageDTOInput {
     public byte[] data;
 }

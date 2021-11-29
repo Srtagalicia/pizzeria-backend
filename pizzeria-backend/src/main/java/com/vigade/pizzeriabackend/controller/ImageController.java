@@ -2,11 +2,9 @@ package com.vigade.pizzeriabackend.controller;
 
 import java.io.IOException;
 import java.util.UUID;
-
 import com.vigade.pizzeriabackend.application.imageAplication.ImageApplication;
 import com.vigade.pizzeriabackend.application.imageAplication.ImageDTO;
 import com.vigade.pizzeriabackend.application.imageAplication.ImageDTOInput;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -45,5 +43,4 @@ public class ImageController {
     public Mono<ResponseEntity<ImageDTO>> getImage(@PathVariable UUID id) {
         return this.imageApplication.getImageRedis(id).map(image -> ResponseEntity.ok(image)).defaultIfEmpty(ResponseEntity.notFound().build());
     }
-   
 }

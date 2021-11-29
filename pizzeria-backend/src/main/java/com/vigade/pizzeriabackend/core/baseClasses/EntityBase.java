@@ -8,8 +8,6 @@ import org.springframework.data.annotation.Transient;
 import org.springframework.validation.annotation.Validated;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
-
 import javax.validation.Validation;
 import javax.validation.ValidatorFactory;
 import javax.validation.Validator;
