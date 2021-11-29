@@ -22,7 +22,7 @@ public class BadRequestExceptionHandler {
     @ExceptionHandler(value = {BadRequestException.class})
     protected ResponseEntity<Object> handleException(BadRequestException exception, WebRequest request) {
 
-        logger.warn(String.format("%s , StackTrace: %s", exception.getMessage(), exception.getStackTrace()));
+        logger.warn(String.format("%s , StackTrace: %s", exception.getMessage(), exception.getStackTrace().toString()));
 
         return ResponseEntity.status(exception.getStatusCode()).body(exception.getExceptions());
     }

@@ -16,24 +16,14 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @ControllerAdvice
-public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
-
-    private final Logger logger;
-
-    @Autowired
-    public RestResponseEntityExceptionHandler(final Logger logger) {
-        this.logger = logger;
-    }
-
-    @ExceptionHandler(value = { MethodArgumentNotValidException.class })
-    protected ResponseEntity<Object> handleException(MethodArgumentNotValidException exception, HttpHeaders headers,
-            HttpStatus status, WebRequest request) {
+public class RestResponseEntityExceptionHandler {
+    
+    @ExceptionHandler(value = {MethodArgumentNotValidException.class})
+    protected ResponseEntity<Object> handleException(MethodArgumentNotValidException exception) {
         Map<String, String> errors = new HashMap<>();
-        for (FieldError error : exception.getFieldErrors()) {
+        for(FieldError error : exception.getFieldErrors()) {
             errors.put(error.getField(), error.getDefaultMessage());
         }
-        logger.warn(String.format("%s , StackTrace: %s", exception.getMessage(), exception.getStackTrace().toString()));
-
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
     }
 }
