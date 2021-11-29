@@ -20,7 +20,11 @@ public class IngredientApplicationImp extends ApplicationBase<Ingredient, UUID> 
     private Logger logger;
 
     @Autowired
-    public IngredientApplicationImp(IngredientRepository ingredientRepository, ModelMapper modelMapper, Logger logger) {
+    public IngredientApplicationImp (
+        IngredientRepository ingredientRepository, 
+        ModelMapper modelMapper, 
+        Logger logger
+    ) {
         super(id -> ingredientRepository.findById(id));
         this.ingredientRepository = ingredientRepository;
         this.modelMapper = modelMapper;
