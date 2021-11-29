@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
 import org.mindrot.jbcrypt.BCrypt;
 
 @Service
@@ -20,17 +21,20 @@ public class UserApplicationImp extends ApplicationBase<User,UUID> implements Us
     private UserRepository userRepository;
     private UserRepositoryRedis userRepositoryRedis;
     private ModelMapper modelMapper;
+    private Logger logger;
 
     @Autowired
     public UserApplicationImp(
         UserRepository userRepository,
         UserRepositoryRedis userRepositoryRedis,
-        ModelMapper modelMapper
+        ModelMapper modelMapper,
+        Logger logger
     ) {
         super(id -> userRepository.findById(id));
         this.userRepository = userRepository;
         this.userRepositoryRedis = userRepositoryRedis;
         this.modelMapper = modelMapper;
+        this.logger = logger;
     }
 
     @Override
@@ -50,6 +54,7 @@ public class UserApplicationImp extends ApplicationBase<User,UUID> implements Us
         userRedis.setRole(user.getRole().toString());
         userRedis.setAccessToken(userDTOOutput.getAccessToken());
         userRedis.setRefreshToken(userDTOOutput.getRefreshToken());
+        logger.info(this.serializeObject(user, "Added User"));
         return user.validate("email", user.getEmail(), email -> this.userRepository.existsByField(email))
             .then(this.userRepository.add(user))
             .then(this.userRepositoryRedis.add(userRedis))
