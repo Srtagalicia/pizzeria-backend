@@ -55,4 +55,9 @@ public class UserApplicationImp extends ApplicationBase<User,UUID> implements Us
             .then(this.userRepositoryRedis.add(userRedis))
             .then(Mono.just(userDTOOutput));
     }
+    
+    @Override
+    public Mono<UserDTOInfoOutput> me(String id) {
+        return this.getById(UUID.fromString(id)).flatMap(monoUser -> Mono.just(this.modelMapper.map(monoUser, UserDTOInfoOutput.class)));
+    }
 }
